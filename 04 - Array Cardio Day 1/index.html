@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Array Cardio 💪</title>
+  <!-- <title>Array Cardio 💪</title> -->
 </head>
 <body>
-  <p><em>Psst: have a look at the JavaScript Console</em> 💁</p>
+  <!-- <p><em>Psst: have a look at the JavaScript Console</em> 💁</p> -->
   <script>
     // Get your shorts on - this is an array workout!
     // ## Array Cardio Day 1
@@ -31,28 +31,81 @@
 
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    const bornIn1500s = inventors.filter(inv => inv.year >= 1500 && inv.year < 1600);
+    console.log('bornIn1500s:', bornIn1500s);
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors' first and last names
+    const names = inventors.map(({ first, last }) => ({ first, last }));
+    console.log('names:', names);
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    const sortedBirth = inventors.sort((a, b) => a.year - b.year);
+    console.log('sortedBirth:', sortedBirth);
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live?
+    const combinedAge = inventors.reduce((sum, inv) => sum + (inv.passed - inv.year), 0);
+    console.log('combinedAge:', combinedAge);
 
     // 5. Sort the inventors by years lived
+    const sortedAge = inventors.sort((a, b) => (a.passed - a.year) - (b.passed - b.year));
+    console.log('sortedAge:', sortedAge);
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+    const boulevards = [
+      "Boulevards of Paris",
+      "City walls of Paris",
+      "Thiers wall",
+      "Wall of Charles V",
+      "Wall of Philip II Augustus",
+      "City gates of Paris",
+      "Haussmann's renovation of Paris",
+      "Boulevards of the Marshals",
+      "Boulevard Auguste-Blanqui",
+      "Boulevard Barbès",
+      "Boulevard Beaumarchais",
+      "Boulevard de l'Amiral-Bruix",
+      "Boulevard des Capucines",
+      "Boulevard de la Chapelle",
+      "Boulevard de Clichy",
+      "Boulevard du Crime",
+      "Boulevard Haussmann",
+      "Boulevard de l'Hôpital",
+      "Boulevard des Italiens",
+      "Boulevard de la Madeleine",
+      "Boulevard de Magenta",
+      "Boulevard Montmartre",
+      "Boulevard du Montparnasse",
+      "Boulevard Raspail",
+      "Boulevard Richard-Lenoir",
+      "Boulevard de Rochechouart",
+      "Boulevard Saint-Germain",
+      "Boulevard Saint-Michel",
+      "Boulevard de Sébastopol",
+      "Boulevard de Strasbourg",
+      "Boulevard du Temple",
+      "Boulevard Voltaire",
+      "Boulevard de la Zone"
+    ];
+    const hasDe = boulevards.filter(b => b.includes('de'));
+    console.log('hasDe:', hasDe);
 
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    const sortedPeople = people.sort();
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+    const instances = data.reduce((count, vehicle) => ({
+      ...count,
+      [vehicle] : (!count[vehicle]) ? 1 : count[vehicle] + 1,
+    }), {});
+    console.log('instances:', instances);
 
   </script>
 </body>
