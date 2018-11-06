@@ -11,6 +11,7 @@
       ...c,
       lowCity: c.city.toLowerCase(),
       lowState: c.state.toLowerCase(),
+      title: `${c.city}, ${c.state}`,
     }));
   });
 
@@ -30,18 +31,27 @@
       return matchAll;
     });
 
+    // highlight matches in suggestion
+    const suggestions = results.map(city => {
+      let titleHTML = city.title;
+      parts.forEach(part => {
+        const exp = new RegExp(`(${part})`, 'i');
+        titleHTML = titleHTML.replace(exp, '<mark>$1</mark>');
+      });
+      return makeSuggestion(titleHTML, city.population);
+    });
+
     // add suggestions to page
-    const suggestions = results.map(makeSuggestion);
     list.innerHTML = '';
     suggestions.forEach(sug => list.appendChild(sug));
   }
 
-  function makeSuggestion(city) {
+  function makeSuggestion(titleHTML, population) {
     const li = document.createElement('li');
     const left = document.createElement('span');
     const right = document.createElement('span');
-    left.textContent = `${city.city}, ${city.state}`;
-    right.textContent = city.population;
+    left.innerHTML = titleHTML;
+    right.textContent = population;
     [left, right].forEach(c => li.appendChild(c));
     return li;
   }
